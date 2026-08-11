@@ -1,0 +1,45 @@
+<!doctype html>
+<html lang="vi">
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta name="description" content="Demo Google Docs sidebar mở GitHub Pages và ghi xác nhận trở lại tài liệu.">
+    <title>Xác nhận Google Docs</title>
+    <link rel="stylesheet" href="styles.css">
+  </head>
+  <body>
+    <main class="shell">
+      <section class="card" aria-labelledby="page-title">
+        <div class="step">Bước 2/2</div>
+        <h1 id="page-title">Xác nhận gửi thông điệp</h1>
+        <p class="lead">
+          Trang này được mở từ sidebar của Google Docs. Khi bạn xác nhận, một thông điệp cố định sẽ được ghi vào cuối tài liệu đó.
+        </p>
+
+        <div class="doc-panel">
+          <span>Tài liệu đích</span>
+          <strong id="doc-id">Đang đọc Doc ID…</strong>
+        </div>
+
+        <form id="confirm-form" method="post" target="_blank">
+          <input id="doc-id-input" type="hidden" name="docId">
+          <input type="hidden" name="confirmation" value="confirm">
+          <button id="confirm-button" type="submit" disabled>Xác nhận</button>
+        </form>
+
+        <p id="status" class="status" role="status" aria-live="polite">
+          Đang kiểm tra link…
+        </p>
+
+        <ol class="flow" aria-label="Luồng demo">
+          <li><span>1</span> Sidebar truyền Doc ID trong query URL.</li>
+          <li><span>2</span> GitHub Pages gửi xác nhận sang Apps Script.</li>
+          <li><span>3</span> Apps Script dùng quyền giáo viên, nhưng chỉ ghi nếu Doc ID đã được đăng ký trước.</li>
+        </ol>
+      </section>
+    </main>
+
+    <script src="config.js"></script>
+    <script src="app.js"></script>
+  </body>
+</html>

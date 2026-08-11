@@ -1,0 +1,59 @@
+name: Xuất bản trang demo
+
+on:
+  push:
+    branches: [main]
+  workflow_dispatch:
+
+permissions:
+  contents: read
+  pages: write
+  id-token: write
+
+concurrency:
+  group: pages
+  cancel-in-progress: true
+
+jobs:
+  deploy:
+    runs-on: ubuntu-latest
+    environment:
+      name: github-pages
+      url: ${{ steps.deployment.outputs.page_url }}
+    steps:
+      - name: Lấy mã nguồn
+        uses: actions/checkout@v4
+
+      - name: Tạo cấu hình runtime
+        env:
+          BRIDGE_URL: ${{ vars.APPS_SCRIPT_WEB_APP_URL }}
+        run: |
+          python - <<'PY'
+          import json
+          import os
+          from pathlib import Path
+
+          # Nhận URL Apps Script từ GitHub Variables, kiểm tra rồi tạo config.js.
+          # Kết quả là site có endpoint cần dùng nhưng repository không chứa URL thật.
+          bridge_url = os.environ.get("BRIDGE_URL", "").strip()
+          if not bridge_url.startswith("https://script.google.com/"):
+              raise SystemExit("Thiếu hoặc sai biến APPS_SCRIPT_WEB_APP_URL")
+
+          payload = "window.DEMO_CONFIG = " + json.dumps(
+              {"bridgeUrl": bridge_url},
+              ensure_ascii=False,
+          ) + ";\n"
+          Path("site/config.js").write_text(payload, encoding="utf-8")
+          PY
+
+      - name: Chuẩn bị GitHub Pages
+        uses: actions/configure-pages@v5
+
+      - name: Đóng gói website
+        uses: actions/upload-pages-artifact@v3
+        with:
+          path: site
+
+      - name: Xuất bản website
+        id: deployment
+        uses: actions/deploy-pages@v4
