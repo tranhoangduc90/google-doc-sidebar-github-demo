@@ -28,9 +28,10 @@ Demo chứng minh luồng sau hoạt động với tài khoản Google cá nhân
 
 ## Quyền và rủi ro
 
-- Web App dùng `USER_DEPLOYING` + `ANYONE`: backend ghi bằng quyền tài khoản giáo viên triển khai.
+- Web App demo dùng `USER_DEPLOYING` + `ANYONE_ANONYMOUS`: backend ghi bằng quyền tài khoản giáo viên triển khai và trang GitHub không bị chặn do học viên dùng tài khoản Google khác.
 - Execution API dùng `MYSELF` chỉ để giáo viên cấu hình danh sách tài liệu từ CLI; học viên không thể gọi hàm quản trị này.
 - Trước khi ghi, backend đối chiếu hash Doc ID với danh sách giáo viên đã đăng ký và kiểm tra hạn dùng demo.
+- Người biết đúng Doc ID đã được cho phép vẫn có thể kích hoạt thông điệp cố định sớm. Với production, cần thêm ticket một lần do n8n/backend tin cậy cấp.
 - Với Classroom thật, n8n hoặc quy trình lấy bài từ Classroom phải đăng ký Doc ID từ nguồn tin cậy; không cho trang học viên tự thêm ID vào danh sách.
 - Doc ID xuất hiện trong URL GitHub Pages. Với hệ thống thật, không thêm tên học viên, điểm hoặc dữ liệu riêng tư vào query.
 - Bound script được sao chép cùng tài liệu và người có quyền sửa tài liệu có thể xem code. Vì vậy script không chứa token, API key hoặc logic bảo mật.
