@@ -4,7 +4,8 @@
  * Script mỏng gắn với Google Docs.
  * Dữ liệu nhận vào: tài liệu đang mở.
  * Việc chính: lấy ID của tài liệu và tạo link GitHub Pages có query docId.
- * Kết quả: menu “Demo xác nhận” mở sidebar; nút trong sidebar mở trang web.
+ * Kết quả: sidebar tự mở khi tài liệu được mở; menu “Demo xác nhận” vẫn cho
+ * phép người dùng mở lại nếu đã đóng sidebar.
  * Nếu lỗi, người dùng thấy thông báo trong Google Docs và có thể xem chi tiết
  * tại Apps Script > Executions.
  */
@@ -16,9 +17,24 @@ function onOpen() {
     .createMenu('Demo xác nhận')
     .addItem('Mở bảng điều khiển', 'showDemoSidebar')
     .addToUi();
+
+  // Tự mở sidebar mỗi lần người dùng mở hoặc tải lại tài liệu.
+  // Nếu bản sao chưa được cấp quyền, menu vẫn xuất hiện để người dùng mở lại
+  // và hoàn tất bước cấp quyền lần đầu.
+  openDemoSidebar_(true);
 }
 
 function showDemoSidebar() {
+  openDemoSidebar_(false);
+}
+
+/**
+ * Nhận chế độ im lặng khi chạy tự động từ onOpen().
+ * Hàm lấy ID tài liệu, tạo URL GitHub Pages và hiển thị sidebar.
+ * Nếu chạy tự động mà thiếu quyền, lỗi được ghi trong Executions nhưng không
+ * hiện hộp thoại làm gián đoạn việc mở tài liệu.
+ */
+function openDemoSidebar_(silent) {
   try {
     var doc = DocumentApp.getActiveDocument();
     var docId = doc.getId();
@@ -39,7 +55,10 @@ function showDemoSidebar() {
       error: String(error && error.message ? error.message : error),
       at: new Date().toISOString(),
     }));
-    DocumentApp.getUi().alert('Chưa thể mở sidebar. Hãy tải lại tài liệu và thử lại.');
+
+    if (!silent) {
+      DocumentApp.getUi().alert('Chưa thể mở sidebar. Hãy tải lại tài liệu và thử lại.');
+    }
   }
 }
 
