@@ -6,6 +6,9 @@
     "https://www.googleapis.com/auth/documents",
     "https://www.googleapis.com/auth/script.storage"
   ],
+  "executionApi": {
+    "access": "MYSELF"
+  },
   "webapp": {
     "executeAs": "USER_DEPLOYING",
     "access": "ANYONE"

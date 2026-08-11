@@ -15,6 +15,7 @@ Demo chứng minh luồng sau hoạt động với tài khoản Google cá nhân
 - Đầu vào: một Google Docs ID thử nghiệm, không chứa dữ liệu học viên.
 - Backend chỉ chấp nhận `confirmation=confirm`; trang web không được gửi nội dung tùy ý để ghi vào Docs.
 - Danh sách cho phép lưu hash SHA-256 của Doc ID trong Script Properties và có ngày hết hạn.
+- Riêng demo hiện tại có fallback là hash SHA-256 của tài liệu thử nghiệm trong source để có thể chạy khi CLI chưa được cấp quyền Execution API; source không chứa Doc ID thật.
 - Kết quả: ba dòng xác nhận được thêm ở cuối tài liệu. Bấm lại không ghi trùng.
 - Khi lỗi: trang Apps Script báo lỗi dễ hiểu; chi tiết kỹ thuật nằm trong **Apps Script → Executions** và log không chứa Doc ID.
 
@@ -28,6 +29,7 @@ Demo chứng minh luồng sau hoạt động với tài khoản Google cá nhân
 ## Quyền và rủi ro
 
 - Web App dùng `USER_DEPLOYING` + `ANYONE`: backend ghi bằng quyền tài khoản giáo viên triển khai.
+- Execution API dùng `MYSELF` chỉ để giáo viên cấu hình danh sách tài liệu từ CLI; học viên không thể gọi hàm quản trị này.
 - Trước khi ghi, backend đối chiếu hash Doc ID với danh sách giáo viên đã đăng ký và kiểm tra hạn dùng demo.
 - Với Classroom thật, n8n hoặc quy trình lấy bài từ Classroom phải đăng ký Doc ID từ nguồn tin cậy; không cho trang học viên tự thêm ID vào danh sách.
 - Doc ID xuất hiện trong URL GitHub Pages. Với hệ thống thật, không thêm tên học viên, điểm hoặc dữ liệu riêng tư vào query.

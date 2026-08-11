@@ -12,6 +12,10 @@ var DEMO_CONFIRMATION_VALUE = 'confirm';
 var DEMO_MARKER = '✅ ĐÃ XÁC NHẬN TỪ TRANG DEMO GITHUB PAGES';
 var DEMO_ALLOWED_HASHES_PROPERTY = 'DEMO_ALLOWED_DOC_HASHES_JSON';
 var DEMO_EXPIRES_AT_PROPERTY = 'DEMO_EXPIRES_AT';
+var DEMO_FALLBACK_ALLOWED_HASHES = [
+  '195381cb7b182b2c419a46e38cf63df11668e39ae54923faed8d0fb5aa977578',
+];
+var DEMO_FALLBACK_EXPIRES_AT = '2026-09-11T00:00:00+07:00';
 
 function doGet() {
   return renderResultPage_({
@@ -149,14 +153,16 @@ function validateDocId_(value) {
  */
 function validateConfiguredAccess_(docId) {
   var props = PropertiesService.getScriptProperties();
-  var expiryText = props.getProperty(DEMO_EXPIRES_AT_PROPERTY) || '';
+  var expiryText = props.getProperty(DEMO_EXPIRES_AT_PROPERTY) || DEMO_FALLBACK_EXPIRES_AT;
   var expiry = new Date(expiryText);
 
   if (!expiryText || isNaN(expiry.getTime()) || expiry.getTime() <= Date.now()) {
     throw new Error('Demo chưa được cấu hình hoặc đã hết hạn.');
   }
 
-  var rawHashes = props.getProperty(DEMO_ALLOWED_HASHES_PROPERTY) || '[]';
+  var rawHashes =
+    props.getProperty(DEMO_ALLOWED_HASHES_PROPERTY) ||
+    JSON.stringify(DEMO_FALLBACK_ALLOWED_HASHES);
   var allowedHashes = JSON.parse(rawHashes);
   var requestedHash = sha256Hex_(docId);
 
