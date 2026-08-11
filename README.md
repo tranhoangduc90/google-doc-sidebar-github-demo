@@ -4,7 +4,7 @@
 
 Demo chứng minh luồng sau hoạt động với tài khoản Google cá nhân:
 
-1. Google Docs tự mở sidebar khi người dùng mở hoặc tải lại tài liệu; menu vẫn cho phép mở lại sau khi đóng.
+1. Người dùng chọn **Demo xác nhận → Bật tự mở sidebar** một lần; sau đó Google Docs tự mở sidebar khi người dùng mở hoặc tải lại tài liệu. Menu vẫn cho phép mở lại sau khi đóng.
 2. Nút trong sidebar mở GitHub Pages với query `docId` của chính tài liệu đang mở.
 3. Nút **Xác nhận** trên GitHub Pages gửi `docId` sang Apps Script Web App.
 4. Web App chạy bằng quyền tài khoản giáo viên triển khai, nhưng chỉ ghi khi Doc ID đã được đăng ký trước.
@@ -36,7 +36,8 @@ Demo chứng minh luồng sau hoạt động với tài khoản Google cá nhân
 - Doc ID xuất hiện trong URL GitHub Pages. Với hệ thống thật, không thêm tên học viên, điểm hoặc dữ liệu riêng tư vào query.
 - Bound script được sao chép cùng tài liệu và người có quyền sửa tài liệu có thể xem code. Vì vậy script không chứa token, API key hoặc logic bảo mật.
 - Bản sao cũ không tự nhận code mới nếu sau này sửa script của tài liệu mẫu.
-- Bản sao chưa cấp quyền có thể chỉ hiện menu ở lần mở đầu; người dùng chọn **Demo xác nhận → Mở bảng điều khiển** để cấp quyền, rồi các lần mở sau sidebar sẽ tự hiện.
+- Trigger tự mở thuộc tài khoản đã bật và từng tài liệu cụ thể. Sau khi nhân bản, cần chọn **Demo xác nhận → Bật tự mở sidebar** một lần cho bản sao nếu muốn bản sao cũng tự mở.
+- Lệnh **Tắt tự mở sidebar** chỉ xóa trigger của tài khoản hiện tại trên đúng tài liệu đó; không sửa nội dung và không xóa trigger khác.
 
 ## Cấu hình danh sách tài liệu được phép
 
