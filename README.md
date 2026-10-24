@@ -57,3 +57,7 @@ Hàm nhận các Doc ID thử nghiệm, băm từng ID rồi lưu hash và thờ
 1. Sao chép `site/config.example.js` thành `site/config.js` và thay URL Web App thử nghiệm.
 2. Mở `site/index.html?docId=DEMO_DOC_ID_12345678901234567890`.
 3. Chạy `node --check site/app.js` và kiểm tra cú pháp các file `.gs` bằng `node --check` trên bản sao tạm `.js`.
+
+## Kế thừa giao diện khi sửa tiếp
+
+Đọc [bộ nhớ master #170 và nguồn hiện hành](docs/MASTER170_INTERFACE_MEMORY.md); giữ chuẩn đã phát cùng ngoại lệ, kiểm phần giao diện chịu tác động.
