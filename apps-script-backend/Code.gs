@@ -195,7 +195,7 @@ function friendlyErrorMessage_(error) {
 }
 
 function renderResultPage_(state) {
-  var color = state.ok ? '#188038' : '#d93025';
+  var color = state.ok ? '#166534' : '#9b0a22';
   var icon = state.ok ? '✓' : '!';
   var docLink = state.docUrl
     ? '<a class="button" href="' + escapeHtml_(state.docUrl) + '" target="_blank">Mở lại Google Docs</a>'
@@ -210,7 +210,7 @@ function renderResultPage_(state) {
     '.card{max-width:560px;margin:12vh auto;padding:32px;background:#fff;border:1px solid #dadce0;border-radius:16px;box-shadow:0 8px 30px rgba(60,64,67,.12)}' +
     '.icon{display:grid;width:48px;height:48px;place-items:center;border-radius:50%;background:' + color + ';color:#fff;font-size:28px;font-weight:700}' +
     'h1{font-size:24px;margin:20px 0 8px}p{color:#5f6368}.button{display:inline-block;margin-top:12px;padding:11px 18px;border-radius:8px;background:#1a73e8;color:#fff;text-decoration:none;font-weight:700}' +
-    '</style></head><body><main class="card">' +
+    ' @font-face{font-family:\'Source Sans 3\';src:url(\'https://tranhoangduc90.github.io/google-doc-sidebar-github-demo/master170/assets/SourceSans3-Variable.woff2\') format(\'woff2\');font-weight:200 900;font-display:swap} body{font-family:\'Source Sans 3\',system-ui,sans-serif;font-size:16px;line-height:1.5;background:#f5f6f8;color:#1f2937} h1{font-size:26px;line-height:1.3;color:#174265}h2{font-size:22px;color:#174265} .m170-logo{display:block;height:36px;width:auto;max-width:100%;object-fit:contain;margin-bottom:16px} button,.button{font:inherit;border-radius:8px}button.primary,.button{background:#152b4e;color:#fff} :focus-visible{outline:3px solid #db0829;outline-offset:3px} .note,.subtitle,.details{color:#586477;font-size:14px}.card{box-shadow:none;border:1px solid #dce1e7;border-radius:12px} .doc-id{white-space:normal;overflow:visible;overflow-wrap:anywhere;text-overflow:clip} .step.done{color:#166534}.step.active{color:#174265}.step.error{color:#9b0a22} .warning{background:#fff4e0;color:#8a5300;border-color:#dce1e7} @media(prefers-reduced-motion:reduce){.spinner{animation:none}} </style></head><body><main class="card"><img class="m170-logo" src="https://tranhoangduc90.github.io/google-doc-sidebar-github-demo/master170/assets/izone-logo-color.png" alt="IZONE — IELTS chiến lược" width="145" height="48">' +
     '<div class="icon">' + icon + '</div>' +
     '<h1>' + escapeHtml_(state.title) + '</h1>' +
     '<p>' + escapeHtml_(state.message) + '</p>' +

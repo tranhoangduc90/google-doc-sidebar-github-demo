@@ -1,0 +1,10 @@
+@import url('./master170/theme.css');
+body[data-m170-product='docs-confirmation'] .card{border:1px solid #dce1e7;border-radius:12px;box-shadow:none;background:#fff}
+body[data-m170-product='docs-confirmation'] .m170-logo{margin-bottom:24px}
+body[data-m170-product='docs-confirmation'] h1{font-size:28px}
+body[data-m170-product='docs-confirmation'] button{background:#152b4e;border-radius:8px}
+body[data-m170-product='docs-confirmation'] .status.error{color:#9b0a22;background:#fde8eb}
+body[data-m170-product='docs-confirmation'] .status.success{color:#166534;background:#e4f5ea}
+body[data-m170-product='docs-confirmation'] :is(.doc-panel,.status,.flow){font-size:16px}
+body[data-m170-product='docs-confirmation'] #doc-id{overflow-wrap:anywhere}
+@media(max-width:600px){body[data-m170-product='docs-confirmation'] h1{font-size:26px}}
